@@ -120,13 +120,42 @@
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/SOESSCXGhFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </br></br>
                         <h5 id="item2-1">Cinemática Direta</h5>
-                        <p>.</p>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
+                        <img src="imagens/irb140_robo.jpg">
+                        <div>
+                            <pre>
+                                <code>
+>> mdl_irb140 % Modelo do Robô
+robot = IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE                   
++---+-----------+-----------+-----------+-----------+-----------+
+| j |     theta |         d |         a |     alpha |    offset |
++---+-----------+-----------+-----------+-----------+-----------+
+|  1|         q1|      0.352|       0.07|    -1.5708|          0|
+|  2|         q2|          0|       0.36|          0|          0|
+|  3|         q3|          0|          0|     1.5708|          0|
+|  4|         q4|       0.38|          0|    -1.5708|          0|
+|  5|         q5|          0|          0|     1.5708|          0|
+|  6|         q6|          0|          0|          0|          0|
+%Cinemática Direta
+>> irb140.fkine(qz);
+>> irb140.fkine(qr);
+>> irb140.fkine(qd);
+%Plote
+tempo = 0:0.5:10;
+q = jtraj(qz, qr, tempo);
+irb140.plot(q)
+pause(1)
+q = jtraj(qr, qd, tempo);
+irb140.plot(q)
+pause(1)
+q = jtraj(qd, qz, tempo);
+irb140.plot(q)
+pause(1)</code>
+                            </pre>
+                        </div>
+                        <video width="320" height="240" controls>
+                            <source src="videos/irb_video1.mp4" type="video/mp4">
+                        </video>
+                        </br></br>
                         <h5 id="item2-2">Cinemática Inversa</h5>
                         <p></p>
                         </br>
