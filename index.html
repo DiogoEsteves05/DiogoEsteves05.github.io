@@ -32,7 +32,6 @@
                 </div>
 
             </div> 
-
             <div class="row">
 
                 <div class="col-3">
@@ -42,13 +41,6 @@
                         <nav class="nav nav-pills flex-column">
                             <a class="nav-link" href="#item1">Introduçao</a>
 
-                            <!--nav class="nav nav-pills flex-column">
-
-                                <a class="nav-link ml-3" href="#item1-1">Lançamento</a>
-
-                                <a class="nav-link ml-3" href="#item1-2">Go Plus</a>
-
-                            </nav-->
                             <a class="nav-link my-2" href="#item2">mdl_irb140</a>
 
                             <nav class="nav nav-pills flex-column">
@@ -82,7 +74,7 @@
 
                 </div>
 
-                <div class="col-9 mb-5">
+                <div class="col-9">
 
                     <div data-spy="scroll" data-target="#navbarVertical" data-offset="0" class="scrollspySite">
 
@@ -157,13 +149,57 @@ pause(1)</code>
                         </video>
                         </br></br>
                         <h5 id="item2-2">Cinemática Inversa</h5>
-                        <p></p>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
+                        <div><pre><code>
+>> mdl_irb140
+
+robot = 
+    
+IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE                   
++---+-----------+-----------+-----------+-----------+-----------+
+| j |     theta |         d |         a |     alpha |    offset |
++---+-----------+-----------+-----------+-----------+-----------+
+|  1|         q1|      0.352|       0.07|    -1.5708|          0|
+|  2|         q2|          0|       0.36|          0|          0|
+|  3|         q3|          0|          0|     1.5708|          0|
+|  4|         q4|       0.38|          0|    -1.5708|          0|
+|  5|         q5|          0|          0|     1.5708|          0|
+|  6|         q6|          0|          0|          0|          0|
+
+>> irb140.fkine(qd)
+
+ans = 
+0         0         1      0.45
+-1         0         0         0
+0        -1         0     0.712
+0         0         0         1
+
+>> qi= irb140.ikine(irb140.fkine(qd),[0 0 0],'mask',[1 1 1 0 0 0]);
+figure(1);
+irb140.teach(qi)
+pause(5)
+</code></pre></div>
+<video width="320" height="240" controls>
+    <source src="videos/irb_video2.mp4" type="video/mp4">
+</video>
+<div><pre><code>
+figure(2);
+Ta = irb140.fkine(qi)
+Ta.print('xyz')
+trplot(irb140.fkine(qd), 'color', 'b')
+hold on
+trplot(Ta, 'color', 'r') %analisar se a pose difere
+
+Ta = 
+    0.9985         0    0.0540      0.45
+         0         1         0         0
+   -0.0540         0    0.9985     0.712
+         0         0         0         1
+t = (0.45, 0, 0.712), RPY/xyz = (0, 3.1, 0) deg
+</code></pre></div>
+<video width="320" height="240" controls>
+    <source src="videos/irb_video3.mp4" type="video/mp4">
+</video>
+                        </br></br>
                         <h5 id="item2-3">Trajetória</h5>
                         <p></p>
                         </br>
