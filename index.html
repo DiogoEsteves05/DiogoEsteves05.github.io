@@ -30,7 +30,7 @@
                     <p>Desta forma exploramos os pontos pedidos, nomeadamente a Cinemática Direta, Cinemática Inversa, e a Trajetoria dos Robos.</p>
                 </div>
             </div> 
-            
+
             <div class="row">
 
                 <div class="col-3">
@@ -71,7 +71,7 @@
 
                     <div data-spy="scroll" data-target="#navbarVertical" data-offset="0" class="scrollspySite">
 
-                        <h4 id="item2">mdl_irb140</h4>
+                        <h4 id="item2">mdl_irb140 (Com 6 graus de liberdade)</h4>
                         <p>Pequeno, poderoso, rápido. É assim que o robo IRB 140 é conhecido.</p>
                         <img src="imagens/ibr140.jpg">
                         <p>Este robo tem 6 eixos é muito compacto e poderoso. É usado industrialmente, movimenta cargas de 6 Quilos, e tem um alcance de 810 mm.</p>
@@ -100,7 +100,7 @@
                         <div>
                             <pre>
                                 <code>
->> mdl_irb140 % Modelo do Robô
+mdl_irb140 % Modelo do Robô
 robot = IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE                   
 +---+-----------+-----------+-----------+-----------+-----------+
 | j |     theta |         d |         a |     alpha |    offset |
@@ -112,9 +112,9 @@ robot = IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE
 |  5|         q5|          0|          0|     1.5708|          0|
 |  6|         q6|          0|          0|          0|          0|
 %Cinemática Direta
->> irb140.fkine(qz);
->> irb140.fkine(qr);
->> irb140.fkine(qd);
+irb140.fkine(qz);
+irb140.fkine(qr);
+irb140.fkine(qd);
 %Plote
 tempo = 0:0.5:10;
 q = jtraj(qz, qr, tempo);
@@ -134,7 +134,7 @@ pause(1)</code>
                         </br></br>
                         <h5 id="item2-2">Cinemática Inversa</h5>
                         <div><pre><code>
->> mdl_irb140
+mdl_irb140
 
 robot = 
     
@@ -149,7 +149,7 @@ IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE
 |  5|         q5|          0|          0|     1.5708|          0|
 |  6|         q6|          0|          0|          0|          0|
 
->> irb140.fkine(qd)
+irb140.fkine(qd)
 
 ans = 
 0         0         1      0.45
@@ -157,7 +157,7 @@ ans =
 0        -1         0     0.712
 0         0         0         1
 
->> qi= irb140.ikine(irb140.fkine(qd),[0 0 0],'mask',[1 1 1 0 0 0]);
+qi= irb140.ikine(irb140.fkine(qd),[0 0 0],'mask',[1 1 1 0 0 0]);
 figure(1);
 irb140.teach(qi)
 pause(5)
@@ -186,7 +186,7 @@ t = (0.45, 0, 0.712), RPY/xyz = (0, 3.1, 0) deg
                         </br></br>
                         <h5 id="item2-3">Trajetória</h5>
                         <div><pre><code>
->> mdl_irb140
+mdl_irb140
 
 robot = 
 IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE                   
@@ -200,18 +200,18 @@ IRB 140 [ABB]:: 6 axis, RRRRRR, stdDH, slowRNE
 |  5|         q5|          0|          0|     1.5708|          0|
 |  6|         q6|          0|          0|          0|          0|
 
->> %mover o end-effector entre duas poses cartesianas
+%mover o end-effector entre duas poses cartesianas
 SE3(0.5, 0.3, 1) * SE3.Rx(pi);
 SE3(0.5, -0.3, 1) * SE3.Rx(pi/2);
 
->> % os vetores de coordenadas conjuntas associados a essas poses são
+% os vetores de coordenadas conjuntas associados a essas poses são
 q1 = irb140.ikine6s(SE3(0.5, 0.3, 1) * SE3.Rx(pi));
 q2 = irb140.ikine6s(SE3(0.5, -0.3, 1) * SE3.Rx(pi/2)); 
 
 %tempo para que a trajetoria ocorra
 t = [0:0.04:3]';
 
->> q = irb140.jtraj(SE3(0.5, 0.3, 1) * SE3.Rx(pi), SE3(0.5, -0.3, 1) * SE3.Rx(pi/2), t);
+q = irb140.jtraj(SE3(0.5, 0.3, 1) * SE3.Rx(pi), SE3(0.5, -0.3, 1) * SE3.Rx(pi/2), t);
 figure(1);
 irb140.plot(q) %animação da trajetoria
                         </code></pre></div>
@@ -224,7 +224,7 @@ qplot(t, q); %traçar todos os ângulos de junta, em função do tempo
                         </code></pre></div>
                         <img src="imagens/irb140_trajetoria2.jpg">
                         </br></br>
-                        <h4 id="item3">mdl_twolink</h4>
+                        <h4 id="item3">mdl_twolink (Com 2 graus de liberdade)</h4>
                         <p>intro</p>
                         </br>
                         </br>
@@ -233,29 +233,145 @@ qplot(t, q); %traçar todos os ângulos de junta, em função do tempo
                         </br>
                         </br>
                         <h5 id="item3-1">Cinemática Direta</h5>
-                        <p></p>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
+                        <img src="imagens/twolink.jpg">
+                        <div>
+                            <pre>
+                                <code>
+mdl_twolink
+twolink.fkine(qz);
+twolink.fkine(qn);
+q = jtraj(qz, qn, 0:0.5:10);
+twolink.plot(q)
+pause(1)
+q = jtraj(qn, qz, 0:0.5:10);
+twolink.plot(q)
+pause(1)
+                                </code>
+                            </pre>
+                        </div>
+                        <video width="320" height="240" controls>
+                            <source src="videos/twolink video 1.mp4" type="video/mp4">
+                        </video>
+                        </br></br>      
                         <h5 id="item3-2">Cinemática Inversa</h5>
-                        <p>...</p>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
+                        <div>
+                            <pre>
+                                <code>
+mdl_twolink
+twolink.fkine(qn)
+ans = 
+            1         0         0     1.866
+            0         0        -1         0
+            0         1         0       0.5
+            0         0         0         1
+
+q = twolink.ikine(twolink.fkine(qn), [0 0], 'mask',[1 1 0 0 0 0])
+figure(1);
+twolink.teach(q) %plota o robot com o cotovelo para baixo
+pause(3)
+                                </code>
+                            </pre>
+                        </div>
+<video width="320" height="240" controls>
+    <source src="videos/twolink video 2.mp4" type="video/mp4">
+</video>
+                        <div>
+                            <pre>
+                                <code>
+figure(2);
+Ta = twolink.fkine(q);
+Ta.print('xyz')
+trplot(twolink.fkine(qn), 'color', 'b')
+hold on
+trplot(Ta, 'color', 'r') %analisar se a pose difere
+q =
+    0.0000    0.5236
+t = (1.87, 0, 0.5), RPY/xyz = (30, 0, 90) deg
+                                </code>
+                            </pre>
+                        </div>
+<video width="320" height="240" controls>
+    <source src="videos/twolink video 3.mp4" type="video/mp4">
+</video>
+                        </br></br>
                         <h5 id="item3-3">Trajetória</h5>
-                        <p>...</p>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
+                        <div>
+                            <pre>
+                                <code>
+q0=[0 0];
+q1 = [pi/2 0];
+t = [0:.06:3];
+q = jtraj(q0, q1, t);
+figure(1);
+twolink.plot(q); 
+</code>
+</pre>
+</div>
+<video width="320" height="240" controls>
+<source src="videos/twolink video 4.mp4" type="video/mp4">
+</video>
+<div>
+<pre>
+<code>
+figure(2);
+subplot(2,1,1)
+plot(t,q(:,1));
+<img src="imagens/twolink 1.jpg">
+title('Theta');
+xlabel('Tempo (s)');
+ylabel('Junta 1 (rad)');
+subplot(2,1,2)
+plot(t,q(:,2));
+<img src="imagens/twolink 2.jpg">
+title('Theta');
+xlabel('Tempo (s)');
+ylabel('Junta 2 (rad)');
+[q, dq, ddq] = jtraj(q0, q1, t);
+figure(3);
+subplot(3,1,1)
+plot(t,q(:,1)); 
+<img src="imagens/twolink 3.jpg">
+title('Theta');
+xlabel('Tempo(s)');
+ylabel('Junta 1 (rad)');
+subplot(3,1,2)
+plot(t,dq(:,1)); 
+<img src="imagens/twolink 4.jpg">
+title('Velocidade')
+xlabel('Tempo (s)');
+ylabel('Junta 1 vel (rad/s)')
+subplot(3,1,3)
+plot(t,ddq(:,1)); 
+<img src="imagens/twolink 5.jpg">
+title('Aceleração')
+xlabel('Tempo (s)');
+ylabel('Junta 1 aceler (rad/s2)')
+q = jtraj(q0, q1, t); 
+H = fkine(twolink,q); % Matriz transformação homogênea
+Hmat = H.double; % Converte SE3 para Matriz
+figure(4);
+subplot(3,1,1)
+s = 'Gráfico da coordenada x variando no tempo';
+plot(t,squeeze(Hmat(1,1,:)));
+xlabel('Tempo (s)'); ylabel('x (m)'); title(s);
+subplot(3,1,2)
+s = 'Gráfico da coordenada y variando no tempo';
+plot(t,squeeze(Hmat(2,1,:)));
+xlabel('Tempo (s)'); ylabel('y (m)'); title(s);
+subplot(3,1,3)
+s = 'Gráfico da coordenada z variando no tempo';
+plot(t,squeeze(Hmat(3,1,:)));
+xlabel('Tempo (s)'); ylabel('z (m)'); title(s);
+figure(5);
+<img src="imagens/s z.jpg">
+s = 'Gráfico das coordenadas x e y';
+plot(squeeze(Hmat(1,1,:)),squeeze(Hmat(2,1,:)));
+xlabel('x (m)'); ylabel('y (m)'); title(s);
+<img src="imagens/s xy.jpg">                
+                                </code>
+                            </pre>
+                        </div>
+                        </br></br>
                     </div>
 
                 </div>
