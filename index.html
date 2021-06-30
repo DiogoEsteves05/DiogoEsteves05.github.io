@@ -225,11 +225,7 @@ qplot(t, q); %traçar todos os ângulos de junta, em função do tempo
                         <img src="imagens/irb140_trajetoria2.jpg">
                         </br></br>
                         <h4 id="item3">mdl_twolink (Com 2 graus de liberdade)</h4>
-                        <p>intro</p>
-                        </br>
-                        </br>
-                        </br>
-                        </br>
+                        <img src="imagens/twolink intro.jpeg" width="400px">
                         </br>
                         </br>
                         <h5 id="item3-1">Cinemática Direta</h5>
@@ -246,19 +242,16 @@ pause(1)
 q = jtraj(qn, qz, 0:0.5:10);
 twolink.plot(q)
 pause(1)
-                                </code>
-                            </pre>
-                        </div>
+</code></pre></div>
                         <video width="320" height="240" controls>
                             <source src="videos/twolink video 1.mp4" type="video/mp4">
                         </video>
                         </br></br>      
                         <h5 id="item3-2">Cinemática Inversa</h5>
-                        <div>
-                            <pre>
-                                <code>
+                        <div><pre><code>
 mdl_twolink
 twolink.fkine(qn)
+
 ans = 
             1         0         0     1.866
             0         0        -1         0
@@ -269,15 +262,11 @@ q = twolink.ikine(twolink.fkine(qn), [0 0], 'mask',[1 1 0 0 0 0])
 figure(1);
 twolink.teach(q) %plota o robot com o cotovelo para baixo
 pause(3)
-                                </code>
-                            </pre>
-                        </div>
+</code></pre></div>>
 <video width="320" height="240" controls>
     <source src="videos/twolink video 2.mp4" type="video/mp4">
 </video>
-                        <div>
-                            <pre>
-                                <code>
+<div><pre><code>
 figure(2);
 Ta = twolink.fkine(q);
 Ta.print('xyz')
@@ -287,62 +276,64 @@ trplot(Ta, 'color', 'r') %analisar se a pose difere
 q =
     0.0000    0.5236
 t = (1.87, 0, 0.5), RPY/xyz = (30, 0, 90) deg
-                                </code>
-                            </pre>
-                        </div>
+</code></pre></div>
 <video width="320" height="240" controls>
     <source src="videos/twolink video 3.mp4" type="video/mp4">
 </video>
                         </br></br>
                         <h5 id="item3-3">Trajetória</h5>
-                        <div>
-                            <pre>
-                                <code>
+                        <div><pre><code>
 q0=[0 0];
 q1 = [pi/2 0];
 t = [0:.06:3];
 q = jtraj(q0, q1, t);
 figure(1);
 twolink.plot(q); 
-</code>
-</pre>
-</div>
+</code></pre></div>
 <video width="320" height="240" controls>
 <source src="videos/twolink video 4.mp4" type="video/mp4">
 </video>
-<div>
-<pre>
-<code>
+<div><pre><code>
 figure(2);
 subplot(2,1,1)
 plot(t,q(:,1));
+</code></pre></div>
 <img src="imagens/twolink 1.jpg">
+<div><pre><code>
 title('Theta');
 xlabel('Tempo (s)');
 ylabel('Junta 1 (rad)');
 subplot(2,1,2)
 plot(t,q(:,2));
+</code></pre></div>
 <img src="imagens/twolink 2.jpg">
+<div><pre><code>
 title('Theta');
 xlabel('Tempo (s)');
 ylabel('Junta 2 (rad)');
 [q, dq, ddq] = jtraj(q0, q1, t);
 figure(3);
 subplot(3,1,1)
-plot(t,q(:,1)); 
+plot(t,q(:,1));
+</code></pre></div> 
 <img src="imagens/twolink 3.jpg">
+<div><pre><code>
 title('Theta');
 xlabel('Tempo(s)');
 ylabel('Junta 1 (rad)');
 subplot(3,1,2)
-plot(t,dq(:,1)); 
+plot(t,dq(:,1));
+</code></pre></div>  
 <img src="imagens/twolink 4.jpg">
+<div><pre><code>
 title('Velocidade')
 xlabel('Tempo (s)');
 ylabel('Junta 1 vel (rad/s)')
 subplot(3,1,3)
 plot(t,ddq(:,1)); 
+</code></pre></div> 
 <img src="imagens/twolink 5.jpg">
+<div><pre><code>
 title('Aceleração')
 xlabel('Tempo (s)');
 ylabel('Junta 1 aceler (rad/s2)')
@@ -363,14 +354,14 @@ s = 'Gráfico da coordenada z variando no tempo';
 plot(t,squeeze(Hmat(3,1,:)));
 xlabel('Tempo (s)'); ylabel('z (m)'); title(s);
 figure(5);
+</code></pre></div> 
 <img src="imagens/s z.jpg">
+<div><pre><code>
 s = 'Gráfico das coordenadas x e y';
 plot(squeeze(Hmat(1,1,:)),squeeze(Hmat(2,1,:)));
 xlabel('x (m)'); ylabel('y (m)'); title(s);
-<img src="imagens/s xy.jpg">                
-                                </code>
-                            </pre>
-                        </div>
+</code></pre></div> 
+<img src="imagens/s xy.jpg">   
                         </br></br>
                     </div>
 
